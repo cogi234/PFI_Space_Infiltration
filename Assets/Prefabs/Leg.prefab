@@ -911,7 +911,7 @@ MonoBehaviour:
   raycastMinAngle: {x: 0, y: -30}
   raycastMaxAngle: {x: 80, y: 30}
   numRaycastTries: 5
-  logisticGrowthRate: 0.5
+  logisticGrowthRate: 1
 --- !u!54 &5212908035005965232
 Rigidbody:
   m_ObjectHideFlags: 0
