@@ -7,26 +7,33 @@ public class IK_Leg : MonoBehaviour
 {
     //Les informations necessaires pour chaque joint
     [Header("Joints")]
-    public Transform hipSwing;
-    public float hipSwingRestAngle;
-    private HingeJoint hipSwingArticulation;
-    public Transform hipElevation;
-    public float hipElevationRestAngle;
-    private HingeJoint hipElevationArticulation;
-    public Transform knee;
-    public float kneeRestAngle;
-    private HingeJoint kneeArticulation;
-    public Transform ankle;
+    [SerializeField] Transform hipSwing;
+    [SerializeField] float hipSwingRestAngle;
+    HingeJoint hipSwingArticulation;
+    [SerializeField] Transform hipElevation;
+    [SerializeField] float hipElevationRestAngle;
+    HingeJoint hipElevationArticulation;
+    [SerializeField] Transform knee;
+    [SerializeField] float kneeRestAngle;
+    HingeJoint kneeArticulation;
+    [SerializeField] Transform ankle;
+    [Header("Other parameters")]
     //Le point de contact avec le sol
-    public Transform endPoint;
+    [SerializeField] Transform endPoint;
+    //Le joueur
+    [SerializeField] Rigidbody playerRb;
+    //Le temps pendant lequel la jambe reste au repos avant de reessayer de trouver une surface
+    [SerializeField] float restTime = 1;
+    float restTimer = 0;
+
     //Les longueurs de la jambe
-    private float length1, length2, length3, totalLength;
+    float length1, length2, length3, totalLength;
 
     //Vers quel point veut-on placer le pieds
     Vector3 target;
     Vector3 targetNormal;
 
-    [SerializeField]private bool tryingToReachTarget;
+    bool tryingToReachTarget;
 
 
     /// <summary>
@@ -48,7 +55,6 @@ public class IK_Leg : MonoBehaviour
         GoToRest();
     }
 
-    public Vector3 parentMovement;
     private void Update()
     {
         if (tryingToReachTarget)
@@ -57,12 +63,14 @@ public class IK_Leg : MonoBehaviour
             if (!CalculateAngles())
             {
                 //Si la jambe n'est plus capable d'atteindre la cible, on met la jambe dans sa position de repos et on arrete d'essayer de l'atteindre
-                tryingToReachTarget = false;
                 GoToRest();
             }
+        } else if (restTimer <= 0)
+        {
+            FindTarget(playerRb.velocity);
         } else
         {
-            FindTarget(parentMovement);
+            restTimer -= Time.deltaTime;
         }
         
     }
@@ -111,7 +119,6 @@ public class IK_Leg : MonoBehaviour
         float Aprime = Mathf.Atan(virtualTarget.y / virtualTarget.z) * Mathf.Rad2Deg;
         float A = alpha + Aprime;
         float B = 180 - beta;
-        //Debug.Log($"a:{a}, b:{b}, c:{c}\nalpha:{alpha}, beta:{beta}, Aprime:{Aprime}\nVirtual target:{virtualTarget}\nA:{A}, B:{B}");
         //Si il y a quelque chose d'invalide dans les resultats, on retourne false
         if (float.IsNaN(alpha) || float.IsNaN(beta) || float.IsNaN(A) || float.IsNaN(Aprime) || float.IsNaN(B))
             return false;
@@ -182,23 +189,19 @@ public class IK_Leg : MonoBehaviour
         if (localParentMovement.x > 0)
         {
             float L = (raycastMaxAngle.y - raycastDefaultAngle.y) * 2;
-            Debug.Log(L);
             angleOffset.y = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * localParentMovement.x))) - 0.5f) * L;
         } else if (localParentMovement.x < 0)
         {
             float L = (raycastMinAngle.y - raycastDefaultAngle.y) * 2;
-            Debug.Log(L);
             angleOffset.y = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * -localParentMovement.x))) - 0.5f) * L;
         }
 
-        Debug.Log(angleOffset);
-
-
-        for (int i = numRaycastTries - 1; i >= 0; i--)
+        //On raycast un certain nombre de fois pour trouver un endroit ou mettre le pieds
+        for (int i = 0; i < numRaycastTries; i++)
         {
             Vector2 raycastAngle = Vector2.Lerp(raycastDefaultAngle + angleOffset, raycastDefaultAngle, (float)i / (float)(numRaycastTries - 1));
             //On convertit les angles en un vecteur de direction, a utiliser pour le raycast.
-            Vector3 raycastWorldDirection = transform.localToWorldMatrix * (Quaternion.Euler(raycastDefaultAngle + angleOffset) * Vector3.forward);
+            Vector3 raycastWorldDirection = transform.localToWorldMatrix * (Quaternion.Euler(raycastAngle) * Vector3.forward);
 
             //Lancer le raycast (On evite la layer Player)
             RaycastHit hit;
@@ -221,6 +224,7 @@ public class IK_Leg : MonoBehaviour
     public void GoToRest()
     {
         tryingToReachTarget = false;
+        restTimer = restTime;
         //Hip swing
         {
             JointSpring temp = hipSwingArticulation.spring;

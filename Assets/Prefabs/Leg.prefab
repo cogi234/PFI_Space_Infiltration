@@ -79,7 +79,7 @@ HingeJoint:
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:
-    spring: 1000
+    spring: 500
     damper: 20
     targetPosition: 0
   m_UseMotor: 0
@@ -712,7 +712,7 @@ HingeJoint:
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:
-    spring: 1000
+    spring: 500
     damper: 20
     targetPosition: 0
   m_UseMotor: 0
@@ -883,7 +883,7 @@ Transform:
   m_Children:
   - {fileID: 2325298431436578881}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1533778559385185079
 MonoBehaviour:
@@ -905,8 +905,8 @@ MonoBehaviour:
   kneeRestAngle: 140
   ankle: {fileID: 684384016192573821}
   endPoint: {fileID: 684384014896092552}
-  tryingToReachTarget: 0
-  parentMovement: {x: 0, y: 0, z: 0}
+  playerRb: {fileID: 0}
+  restTime: 0.1
   raycastDefaultAngle: {x: 45, y: 0}
   raycastMinAngle: {x: 0, y: -30}
   raycastMaxAngle: {x: 80, y: 30}
@@ -1016,7 +1016,7 @@ HingeJoint:
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:
-    spring: 1000
+    spring: 500
     damper: 20
     targetPosition: 0
   m_UseMotor: 0
@@ -1028,8 +1028,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: -45
-    max: 45
+    min: -50
+    max: 50
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
