@@ -21,7 +21,7 @@ public class IK_Leg : MonoBehaviour
     //Le point de contact avec le sol
     [SerializeField] Transform endPoint;
     //Le joueur
-    [SerializeField] Rigidbody playerRb;
+    [SerializeField] PlayerController player;
     //Le temps pendant lequel la jambe reste au repos avant de reessayer de trouver une surface
     [SerializeField] float restTime = 1;
     float restTimer = 0;
@@ -67,7 +67,7 @@ public class IK_Leg : MonoBehaviour
             }
         } else if (restTimer <= 0)
         {
-            FindTarget(playerRb.velocity);
+            FindTarget(player.Velocity);
         } else
         {
             restTimer -= Time.deltaTime;
