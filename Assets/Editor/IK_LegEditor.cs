@@ -11,9 +11,9 @@ public class IK_LegEditor : Editor
         DrawDefaultInspector();
 
         IK_Leg legScript = (IK_Leg)target;
-        if (GUILayout.Button("Calculate angles"))
+        if (GUILayout.Button("Calculate Ray"))
         {
-            legScript.CalculateAngles();
+            legScript.FindTarget(legScript.parentMovement);
         }
     }
 }

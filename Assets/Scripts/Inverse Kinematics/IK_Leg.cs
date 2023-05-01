@@ -9,23 +9,21 @@ public class IK_Leg : MonoBehaviour
     [Header("Joints")]
     public Transform hipSwing;
     public float hipSwingRestAngle;
-    private ArticulationBody hipSwingArticulation;
+    private HingeJoint hipSwingArticulation;
     public Transform hipElevation;
     public float hipElevationRestAngle;
-    private ArticulationBody hipElevationArticulation;
+    private HingeJoint hipElevationArticulation;
     public Transform knee;
     public float kneeRestAngle;
-    private ArticulationBody kneeArticulation;
+    private HingeJoint kneeArticulation;
     public Transform ankle;
-    public float ankleRestAngle;
-    private ArticulationBody ankleArticulation;
     //Le point de contact avec le sol
     public Transform endPoint;
     //Les longueurs de la jambe
     private float length1, length2, length3, totalLength;
 
     //Vers quel point veut-on placer le pieds
-    [SerializeField] Vector3 target;
+    Vector3 target;
     Vector3 targetNormal;
 
     [SerializeField]private bool tryingToReachTarget;
@@ -37,10 +35,9 @@ public class IK_Leg : MonoBehaviour
     private void Awake()
     {
         //Aller chercher les references
-        hipElevationArticulation = hipElevation.GetComponent<ArticulationBody>();
-        hipSwingArticulation = hipSwing.GetComponent<ArticulationBody>();
-        kneeArticulation = knee.GetComponent<ArticulationBody>();
-        ankleArticulation = ankle.GetComponent<ArticulationBody>();
+        hipElevationArticulation = hipElevation.GetComponent<HingeJoint>();
+        hipSwingArticulation = hipSwing.GetComponent<HingeJoint>();
+        kneeArticulation = knee.GetComponent<HingeJoint>();
 
         //Calculer les longueurs de la jambe
         length1 = Vector3.Distance(hipElevation.position, knee.position);
@@ -51,6 +48,7 @@ public class IK_Leg : MonoBehaviour
         GoToRest();
     }
 
+    public Vector3 parentMovement;
     private void Update()
     {
         if (tryingToReachTarget)
@@ -64,8 +62,9 @@ public class IK_Leg : MonoBehaviour
             }
         } else
         {
-            GoToRest();
+            FindTarget(parentMovement);
         }
+        
     }
 
     /// <summary>
@@ -82,8 +81,12 @@ public class IK_Leg : MonoBehaviour
         if (hipSwingAngle > 180)
             hipSwingAngle -= 360;
         //Si l'angle cible est en dehors des limites de la hanche, on retourne false
-        if (hipSwingAngle <= hipSwingArticulation.xDrive.upperLimit && hipSwingAngle >= hipSwingArticulation.xDrive.lowerLimit)
-            hipSwingArticulation.SetDriveTarget(ArticulationDriveAxis.X, hipSwingAngle);
+        if (hipSwingAngle <= hipSwingArticulation.limits.max && hipSwingAngle >= hipSwingArticulation.limits.min)
+        {
+            JointSpring temp = hipSwingArticulation.spring;
+            temp.targetPosition = hipSwingAngle;
+            hipSwingArticulation.spring = temp;
+        }
         else
             return false;
         
@@ -93,6 +96,8 @@ public class IK_Leg : MonoBehaviour
         Vector3 virtualTarget;
         {
             float distance = localTarget.magnitude;
+            if (distance > length1 + length2)
+                return false;
             Vector3 temp = localTarget;
             temp.x = 0;
             virtualTarget = temp.normalized * distance;
@@ -114,31 +119,127 @@ public class IK_Leg : MonoBehaviour
         //Hip Elevation
         float hipElevationAngle = A;
         //Si l'angle cible est en dehors des limites de la hanche, on retourne false
-        if (hipElevationAngle <= hipElevationArticulation.yDrive.upperLimit && hipElevationAngle >= hipElevationArticulation.yDrive.lowerLimit)
-            hipElevationArticulation.SetDriveTarget(ArticulationDriveAxis.Y, hipElevationAngle);
+        if (hipElevationAngle <= hipElevationArticulation.limits.max && hipElevationAngle >= hipElevationArticulation.limits.min)
+        {
+            JointSpring temp = hipElevationArticulation.spring;
+            temp.targetPosition = hipElevationAngle;
+            hipElevationArticulation.spring = temp;
+        }
         else
             return false;
 
         //Knee
-        float kneeAngle = -B;
+        float kneeAngle = B;
         //Si l'angle cible est en dehors des limites du genoux, on retourne false
-        if (kneeAngle <= kneeArticulation.yDrive.upperLimit && kneeAngle >= kneeArticulation.yDrive.lowerLimit)
-            kneeArticulation.SetDriveTarget(ArticulationDriveAxis.Y, kneeAngle);
+        if (kneeAngle <= kneeArticulation.limits.max && kneeAngle >= kneeArticulation.limits.min)
+        {
+            JointSpring temp = kneeArticulation.spring;
+            temp.targetPosition = kneeAngle;
+            kneeArticulation.spring = temp;
+        }
         else
             return false;
 
+        //Ankle
+        ankle.rotation = Quaternion.LookRotation(-targetNormal, transform.up);
+
+
         return true;
+    }
+
+
+    [Header("Raycasts")]
+    //A quels angles est-ce que les raycast peuvent etre faits
+    [SerializeField] Vector2 raycastDefaultAngle;
+    [SerializeField] Vector2 raycastMinAngle;
+    [SerializeField] Vector2 raycastMaxAngle;
+    //Combien d'essais de raycasts va-t-on faire avant d'abandonner. Plus ce nombre est haut, plus la performance est affectee
+    [SerializeField] int numRaycastTries = 1;
+    [SerializeField] float logisticGrowthRate;
+
+    /// <summary>
+    /// On utilise des raycasts pour trouver le prochain point ou la patte peut marcher
+    /// </summary>
+    public void FindTarget(Vector3 parentMovement)
+    {
+        //On met le mouvement du parent en terme du point de reference local
+        Vector3 localParentMovement = (transform.worldToLocalMatrix * parentMovement);
+
+        //Selon la direction du mouvement, on modifie un peu l'angle du raycast, pour bouger les pattes vers le devant lorsqu'on avance, par exemple.
+        Vector2 angleOffset = new Vector2();
+        //J'utilise la fonction logistique pour changer la vitesse en offset d'angle   https://en.wikipedia.org/wiki/Logistic_function
+        //Pour le x
+        if (localParentMovement.z > 0)
+        {
+            float L = (raycastMinAngle.x - raycastDefaultAngle.x) * 2;
+            angleOffset.x = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * localParentMovement.z))) - 0.5f) * L;
+        } else if (localParentMovement.z < 0)
+        {
+            float L = (raycastMaxAngle.x - raycastDefaultAngle.x) * 2;
+            angleOffset.x = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * -localParentMovement.z))) - 0.5f) * L;
+        }
+        //Pour le y
+        if (localParentMovement.x > 0)
+        {
+            float L = (raycastMaxAngle.y - raycastDefaultAngle.y) * 2;
+            Debug.Log(L);
+            angleOffset.y = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * localParentMovement.x))) - 0.5f) * L;
+        } else if (localParentMovement.x < 0)
+        {
+            float L = (raycastMinAngle.y - raycastDefaultAngle.y) * 2;
+            Debug.Log(L);
+            angleOffset.y = ((1 / (1 + Mathf.Exp(-logisticGrowthRate * -localParentMovement.x))) - 0.5f) * L;
+        }
+
+        Debug.Log(angleOffset);
+
+
+        for (int i = numRaycastTries - 1; i >= 0; i--)
+        {
+            Vector2 raycastAngle = Vector2.Lerp(raycastDefaultAngle + angleOffset, raycastDefaultAngle, (float)i / (float)(numRaycastTries - 1));
+            //On convertit les angles en un vecteur de direction, a utiliser pour le raycast.
+            Vector3 raycastWorldDirection = transform.localToWorldMatrix * (Quaternion.Euler(raycastDefaultAngle + angleOffset) * Vector3.forward);
+
+            //Lancer le raycast (On evite la layer Player)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, raycastWorldDirection, out hit, totalLength, ~LayerMask.GetMask("Player")))
+            {
+                //Si le raycast s'est rendu, on choisi cette cible. Le point de la cible est le point ou la cheville va.
+                //On enregistre aussi ensuite la normale de la surface, pour pouvoir orienter le pieds.
+                targetNormal = hit.normal;
+                target = hit.point + hit.normal * length3;
+                tryingToReachTarget = true;
+                //Si on a trouver un endroit ou mettre le pieds, on arrete le loop et on retourne.
+                return;
+            }
+        }
     }
 
     /// <summary>
     /// Dire a la jambe a aller a sa position de repos
     /// </summary>
-    private void GoToRest()
+    public void GoToRest()
     {
-        hipSwingArticulation.SetDriveTarget(ArticulationDriveAxis.X, hipSwingRestAngle);
-        hipElevationArticulation.SetDriveTarget(ArticulationDriveAxis.Y, hipElevationRestAngle);
-        kneeArticulation.SetDriveTarget(ArticulationDriveAxis.Y, kneeRestAngle);
-        ankleArticulation.SetDriveTarget(ArticulationDriveAxis.Y, ankleRestAngle);
-        ankleArticulation.SetDriveTarget(ArticulationDriveAxis.Z, ankleRestAngle);
+        tryingToReachTarget = false;
+        //Hip swing
+        {
+            JointSpring temp = hipSwingArticulation.spring;
+            temp.targetPosition = hipSwingRestAngle;
+            hipSwingArticulation.spring = temp;
+        }
+        //Hip elevation
+        {
+            JointSpring temp = hipElevationArticulation.spring;
+            temp.targetPosition = hipElevationRestAngle;
+            hipElevationArticulation.spring = temp;
+        }
+        //Knee
+        {
+            JointSpring temp = kneeArticulation.spring;
+            temp.targetPosition = kneeRestAngle;
+            kneeArticulation.spring = temp;
+        }
+        //Ankle
+        ankle.localEulerAngles = Vector3.zero;
     }
 }
