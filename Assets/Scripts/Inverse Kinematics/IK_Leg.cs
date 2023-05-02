@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class IK_Leg : MonoBehaviour
@@ -52,6 +53,10 @@ public class IK_Leg : MonoBehaviour
         length3 = Vector3.Distance(ankle.position, endPoint.position);
         totalLength = length1 + length2;
 
+        //On fait disparaitre le curseur
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //On met les jambes en mode repos
         GoToRest();
     }
 
@@ -67,7 +72,7 @@ public class IK_Leg : MonoBehaviour
             }
         } else if (restTimer <= 0)
         {
-            FindTarget(player.Velocity);
+            FindTarget(player.transform.localToWorldMatrix * player.Velocity);
         } else
         {
             restTimer -= Time.deltaTime;
