@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
             //On utilise un SphereCast pour s'orienter selon notre plancher
             RaycastHit hit;
-            if (Physics.SphereCast(transform.position, 0.25f, -transform.up, out hit, walkingHeight * 2, ~LayerMask.GetMask("Player")))
+            if (Physics.SphereCast(transform.position, 0.25f, -transform.up, out hit, walkingHeight * 2, LayerMask.GetMask("Default")))
             {
                 Vector3 normal = hit.normal;
                 Vector3 sideNormals = Vector3.zero;
