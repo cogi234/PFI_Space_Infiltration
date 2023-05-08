@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8204410616299712915}
   - component: {fileID: 5299446619363665699}
+  - component: {fileID: 7896086543943139113}
   - component: {fileID: 5474798790357185787}
   - component: {fileID: 2969911240823713139}
   - component: {fileID: 6052268277995406022}
   - component: {fileID: 3106252633558632309}
+  - component: {fileID: 2766866366878660518}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -34,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5299446619363665699
 MonoBehaviour:
@@ -49,6 +51,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &7896086543943139113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553462731880039422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0d8f51d363a1c47a7833f0806b8c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 5
+  deactivate: 1
 --- !u!33 &5474798790357185787
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -128,7 +144,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2553462731880039422}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.003141593
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -147,3 +163,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2766866366878660518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2553462731880039422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e9c6b643656f548881a3f2ecfdfe7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  density: 1
+  shape: 0
+  rb: {fileID: 3106252633558632309}
