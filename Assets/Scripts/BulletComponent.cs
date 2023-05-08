@@ -17,13 +17,8 @@ public class BulletComponent : MonoBehaviour
         if (collision.gameObject.TryGetComponent<HealthComponent>(out health))
             health.TakeDamage(damage);
         //On desactive la balle
-        gameObject.SetActive(false);
-    }
-
-    //Lorsqu'une balle est desactivee, on remet a zero sa vitesse
-    private void OnDisable()
-    {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 }
