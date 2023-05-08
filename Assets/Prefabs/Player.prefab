@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 335799717}
   - component: {fileID: 335799720}
   - component: {fileID: 335799719}
+  - component: {fileID: 915428032}
   m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
@@ -84,6 +85,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &915428032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335799716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa246582a7708d46a24c02379bf100b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedRigidbody: {fileID: 449929332}
+  maxRaycastDistance: 200
+  shootForce: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +112,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 1791050126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -325,7 +341,7 @@ GameObject:
   - component: {fileID: 2722072105051998856}
   - component: {fileID: 8473657080569286311}
   - component: {fileID: 4281095891916870759}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +442,7 @@ GameObject:
   - component: {fileID: 1694861030700154971}
   - component: {fileID: 6818681368431792392}
   - component: {fileID: 6670546062396080732}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
