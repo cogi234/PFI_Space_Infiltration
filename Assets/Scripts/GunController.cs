@@ -6,6 +6,7 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] Rigidbody associatedRigidbody;
     [SerializeField] Transform endPoint;
+    ParticleSystem muzzleFlash;
     [SerializeField] float maxRaycastDistance = 200f;
     [SerializeField] float shootForce;
     [SerializeField] int bulletDamage;
@@ -23,6 +24,7 @@ public class GunController : MonoBehaviour
     {
         cam = Camera.main;
         bulletPool = GameObject.Find("BulletPool").GetComponent<ObjectPool>();
+        muzzleFlash = endPoint.GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -54,6 +56,7 @@ public class GunController : MonoBehaviour
 
     public void Shoot()
     {
+        muzzleFlash.Play();
         //Je prends une balle
         GameObject bullet = bulletPool.GetElement();
         //Je lui met la layer Player
