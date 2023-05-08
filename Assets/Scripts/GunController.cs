@@ -27,9 +27,9 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        //On fait un raycast pour voir si la camera pointe vers un point precis. On ignore player pour pas tirer sur nous meme ou sur nos balles
+        //On fait un raycast pour voir si la camera pointe vers un point precis et qu'on est pas en mode viser. On ignore player pour pas tirer sur nous meme ou sur nos balles
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxRaycastDistance, ~LayerMask.GetMask("Player")))
+        if (!Input.GetButton("Aim") && Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxRaycastDistance, ~LayerMask.GetMask("Player")))
         {
             //Si oui, on oriente le gun vers ce point
             transform.rotation = Quaternion.LookRotation(hit.point - transform.position, transform.up) * Quaternion.Euler(90,0,0);

@@ -100,7 +100,7 @@ MonoBehaviour:
   associatedRigidbody: {fileID: 449929332}
   endPoint: {fileID: 1098968338}
   maxRaycastDistance: 200
-  shootForce: 10
+  shootForce: 0.1
   bulletDamage: 1
   inaccuracy: 5
   shootInterval: 0.25
