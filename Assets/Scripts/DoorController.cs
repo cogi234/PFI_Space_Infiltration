@@ -9,7 +9,7 @@ public class DoorController : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] float openRadius;
 
-    float openness = 0;
+    public float openness = 0;
     Vector3 leftClosed, leftOpen, rightClosed, rightOpen;
 
     private void Awake()

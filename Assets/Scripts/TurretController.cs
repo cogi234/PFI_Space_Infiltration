@@ -5,11 +5,13 @@ using UnityEngine;
 public class TurretController : MonoBehaviour
 {
     // Vision turret
+    [Header("Vision")]
     [SerializeField] float fieldOfViewXZ;
     [SerializeField] float fieldOfViewY;
     bool PlayerVisible = false;
 
     // Rotation turret
+    [Header("Movement")]
     [SerializeField] Vector3 rotation;
     [SerializeField] float TimeToRotate;
     Quaternion targetRotation;
@@ -21,8 +23,10 @@ public class TurretController : MonoBehaviour
     Transform sphere;
 
     // turret Attacks
+    [Header("Shooting")]
     [SerializeField] float shootInterval;
     float shootTimer = 0f;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;

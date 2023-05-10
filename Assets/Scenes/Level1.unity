@@ -202,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5370260426281713672, guid: 3ca2105707ad81a469c287bc04f4e17e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.10146999
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 5370260426281713672, guid: 3ca2105707ad81a469c287bc04f4e17e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EngineRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 3196997641374392301, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4055314520198660845, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.4
@@ -308,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 4437162124944597917, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5613951949795753676, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

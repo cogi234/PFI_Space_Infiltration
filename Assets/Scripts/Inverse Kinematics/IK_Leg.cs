@@ -26,6 +26,10 @@ public class IK_Leg : MonoBehaviour
     //Le temps pendant lequel la jambe reste au repos avant de reessayer de trouver une surface
     [SerializeField] float restTime = 1;
     float restTimer = 0;
+    //Le son pour quand la patte touche a une surface
+    [SerializeField] AudioSource stepSound;
+    [SerializeField] float targetTouchTreshold;
+    bool touchingTarget = false;
 
     //Les longueurs de la jambe
     float length1, length2, length3, totalLength;
@@ -64,11 +68,19 @@ public class IK_Leg : MonoBehaviour
     {
         if (tryingToReachTarget)
         {
+            //Si on touche a notre objectif, on joue le son associe
+            if (!touchingTarget && Vector3.Distance(ankle.position, target) <= targetTouchTreshold)
+            {
+                touchingTarget = true;
+                stepSound.Play();
+            }
+
             //On essaie d'atteindre la cible
             if (!CalculateAngles())
             {
                 //Si la jambe n'est plus capable d'atteindre la cible, on met la jambe dans sa position de repos et on arrete d'essayer de l'atteindre
                 GoToRest();
+                touchingTarget = false;
             }
         } else if (restTimer <= 0)
         {
