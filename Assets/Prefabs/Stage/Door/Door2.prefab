@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5876089069999625221}
   - component: {fileID: 1079626992912173012}
   - component: {fileID: 5308501350074774166}
+  - component: {fileID: 4118972005693212120}
   m_Layer: 0
-  m_Name: Circle.019
+  m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4118972005693212120
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684567869490212248}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.002888991, y: 0.017889382, z: 0.03196314}
+  m_Center: {x: 4.0745363e-10, y: -0.008359461, z: 0.00026875088}
 --- !u!1 &3766703327734153194
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +116,7 @@ GameObject:
   - component: {fileID: 6407238988920416353}
   - component: {fileID: 5659372331028128018}
   - component: {fileID: 7251823584283717409}
+  - component: {fileID: 5331070449466070535}
   m_Layer: 0
   m_Name: Door2
   m_TagString: Untagged
@@ -108,7 +131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3766703327734153194}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -117,8 +140,8 @@ Transform:
   - {fileID: 5876089069999625221}
   - {fileID: 7219260101664052017}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &5659372331028128018
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -169,6 +192,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5331070449466070535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766703327734153194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d11e834a819a2f43a8aeee866533d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftDoor: {fileID: 5876089069999625221}
+  rightDoor: {fileID: 7219260101664052017}
+  leftMovement: {x: 0, y: -0.0125, z: 0}
+  rightMovement: {x: 0, y: 0.0125, z: 0}
+  speed: 1
+  openRadius: 3
 --- !u!1 &6039506627666552397
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,8 +221,9 @@ GameObject:
   - component: {fileID: 7219260101664052017}
   - component: {fileID: 2100510359757411832}
   - component: {fileID: 2890556959343072183}
+  - component: {fileID: 5823699724333721080}
   m_Layer: 0
-  m_Name: Circle.020
+  m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,6 +294,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5823699724333721080
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6039506627666552397}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.002888997, y: 0.017204162, z: 0.03196314}
+  m_Center: {x: -4.656613e-10, y: 0.008702075, z: 0.00026875088}
 --- !u!1 &8060424945163146645
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +327,7 @@ GameObject:
   - component: {fileID: 4932251616668144807}
   - component: {fileID: 6694984206671162702}
   m_Layer: 0
-  m_Name: Circle.017
+  m_Name: DoorFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
