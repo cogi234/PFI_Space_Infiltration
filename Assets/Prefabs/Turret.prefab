@@ -331,9 +331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldOfViewXZ: 0
   fieldOfViewY: 0
-  DetectionRadius: 10
-  rotation: {x: 0, y: 0, z: 0}
-  TimeToRotate: 0
+  rotationMaxXZ: 0
+  rotationMaxY: 0
+  turretMode: 0
   shootInterval: 0
 --- !u!1 &5724057420321211721
 GameObject:

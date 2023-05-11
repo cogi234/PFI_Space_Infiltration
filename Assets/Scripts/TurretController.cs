@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +8,7 @@ public class TurretController : MonoBehaviour
     [Header("Vision")]
     [SerializeField] float fieldOfViewXZ;
     [SerializeField] float fieldOfViewY;
-    [SerializeField] float DetectionRadius;
+    bool PlayerVisible = false;
 
     // Rotation turret
     [Header("Movement")]
@@ -30,50 +29,35 @@ public class TurretController : MonoBehaviour
 
     void Start()
     {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            var transforms = GetComponentsInChildren<Transform>();
-            foreach (var i in transforms)
-            {
-                if (i.gameObject.name == "Barrel")
-                    barrel = i;
-                if (i.gameObject.name == "Sphere")
-                    sphere = i;
-            }
-            initialRotation = transform.rotation;
-            targetRotation = Quaternion.Euler(rotation);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        var transforms = GetComponentsInChildren<Transform>();
+        foreach (var i in transforms)
+        {
+            if (i.gameObject.name == "Barrel")
+                barrel = i;
+            if (i.gameObject.name == "Sphere")
+                sphere = i;
+        }
+        initialRotation = transform.rotation;
+        targetRotation = Quaternion.Euler(rotation);
     }
 
     void Update()
     {
-        // get direction vector
-        Vector3 direction = player.position - sphere.position;
+        rotationDuration += Time.deltaTime;
 
-        // rotate towards target object
-        if (direction != Vector3.zero)
+        if (rotationDuration < TimeToRotate)
         {
-            Debug.Log(Quaternion.Angle(Quaternion.LookRotation(direction), sphere.rotation));
-        }
-        if (false)
-        {
-
+            float t = rotationDuration / TimeToRotate;
+            sphere.rotation = Quaternion.Lerp(initialRotation, targetRotation, t);
         }
         else
         {
-            rotationDuration += Time.deltaTime;
-
-            if (rotationDuration < TimeToRotate)
-            {
-                float t = rotationDuration / TimeToRotate;
-                sphere.rotation = Quaternion.Lerp(initialRotation, targetRotation, t);
-            }
-            else
-            {
-                sphere.rotation = targetRotation;
-                rotationDuration = 0f;
-                var temp = initialRotation;
-                initialRotation = targetRotation;
-                targetRotation = temp;
-            }
+            sphere.rotation = targetRotation;
+            rotationDuration = 0f;
+            var temp = initialRotation;
+            initialRotation = targetRotation;
+            targetRotation = temp;
         }
 
     }
