@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6626eb4b4e681b347a02edb40a5a8b11, type: 2}
+  - {fileID: 2100000, guid: ee47644675828514c8b999edaa99ee59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -315,7 +315,7 @@ Transform:
   - {fileID: 5724057419362105892}
   - {fileID: 5724057418383188655}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6347566123252602918
 MonoBehaviour:
@@ -332,8 +332,8 @@ MonoBehaviour:
   fieldOfViewXZ: 0
   fieldOfViewY: 0
   DetectionRadius: 10
-  rotation: {x: 0, y: 0, z: 0}
-  TimeToRotate: 0
+  rotation: {x: 0, y: 90, z: 0}
+  TimeToRotate: 5
   shootInterval: 0
 --- !u!1 &5724057420321211721
 GameObject:
