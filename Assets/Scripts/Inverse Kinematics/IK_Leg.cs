@@ -72,7 +72,6 @@ public class IK_Leg : MonoBehaviour
             if (!touchingTarget && Vector3.Distance(ankle.position, target) <= targetTouchTreshold)
             {
                 touchingTarget = true;
-                stepSound.pitch = Random.Range(0.75f, 1.25f);
                 stepSound.Play();
             }
 
