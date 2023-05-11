@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour
 {
-    // Vision turret
     [Header("Vision")]
-    [SerializeField] float fieldOfViewXZ;
-    [SerializeField] float fieldOfViewY;
-    [SerializeField] float DetectionRadius;
+    [SerializeField] float radius;
+    [SerializeField] float angle;
+    [HideInInspector] public bool IsVisible;
+    [SerializeField] LayerMask obstructionMask;
+    [SerializeField] LayerMask targetMask;
 
     // Rotation turret
     [Header("Movement")]
@@ -20,7 +21,7 @@ public class TurretController : MonoBehaviour
     float rotationDuration = 0f;
 
     Transform barrel;
-    Transform player;
+    GameObject player;
     Transform sphere;
 
     // turret Attacks
@@ -30,30 +31,23 @@ public class TurretController : MonoBehaviour
 
     void Start()
     {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            var transforms = GetComponentsInChildren<Transform>();
-            foreach (var i in transforms)
-            {
-                if (i.gameObject.name == "Barrel")
-                    barrel = i;
-                if (i.gameObject.name == "Sphere")
-                    sphere = i;
-            }
-            initialRotation = transform.rotation;
-            targetRotation = Quaternion.Euler(rotation);
+        player = GameObject.FindGameObjectWithTag("Player");
+        obstructionMask = LayerMask.GetMask("Default");
+        var transforms = GetComponentsInChildren<Transform>();
+        foreach (var i in transforms)
+        {
+            if (i.gameObject.name == "Barrel")
+                barrel = i;
+            if (i.gameObject.name == "Sphere")
+                sphere = i;
+        }
+        initialRotation = transform.rotation;
+        targetRotation = Quaternion.Euler(rotation);
+        StartCoroutine(FOV());
     }
-
     void Update()
     {
-        // get direction vector
-        Vector3 direction = player.position - sphere.position;
-
-        // rotate towards target object
-        if (direction != Vector3.zero)
-        {
-            Debug.Log(Quaternion.Angle(Quaternion.LookRotation(direction), sphere.rotation));
-        }
-        if (false)
+        if (IsVisible)
         {
 
         }
@@ -76,5 +70,42 @@ public class TurretController : MonoBehaviour
             }
         }
 
+    }
+    // Source: https://www.youtube.com/watch?v=j1-OyLo77ss
+    IEnumerator FOV()
+    {
+        WaitForSeconds wait = new WaitForSeconds(0.2f);
+        while (true)
+        {
+            yield return wait;
+
+            FieldOfViewCheck();
+        }
+    }
+    void FieldOfViewCheck()
+    {
+        Collider[] rangeChecks = Physics.OverlapSphere(sphere.position, radius, targetMask);
+
+        if (rangeChecks.Length != 0)
+        {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - sphere.position).normalized;
+
+            if (Vector3.Angle(sphere.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(sphere.position, player.transform.position);
+
+                if (!Physics.Raycast(sphere.position, directionToTarget, distanceToTarget, obstructionMask))
+                    IsVisible = true;
+                else
+                    IsVisible = false;
+            }
+            else
+            {
+                IsVisible = false;
+            }
+        }
+        else if (IsVisible)
+            IsVisible = false;
     }
 }
