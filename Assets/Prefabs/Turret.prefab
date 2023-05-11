@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 551f4b8be10b46645a37a8f330970784, type: 2}
+  - {fileID: 2100000, guid: 6626eb4b4e681b347a02edb40a5a8b11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -334,9 +334,6 @@ MonoBehaviour:
   DetectionRadius: 10
   rotation: {x: 0, y: 0, z: 0}
   TimeToRotate: 0
-  rotationMaxXZ: 0
-  rotationMaxY: 0
-  turretMode: 0
   shootInterval: 0
 --- !u!1 &5724057420321211721
 GameObject:
