@@ -9,6 +9,8 @@ public class TurretController : MonoBehaviour
     [SerializeField] float radius;
     [SerializeField] float angle;
     [HideInInspector] public bool IsVisible;
+    bool wasVisible = false;
+    Quaternion rotation = Quaternion.identity;
     [SerializeField] LayerMask obstructionMask;
     [SerializeField] LayerMask targetMask;
 
@@ -26,6 +28,7 @@ public class TurretController : MonoBehaviour
     // turret Attacks
     [Header("Shooting")]
     [SerializeField] float shootInterval;
+    [SerializeField] float rotationSpeed;
     float shootTimer = 0f;
 
     void Start()
@@ -47,10 +50,37 @@ public class TurretController : MonoBehaviour
     {
         if (IsVisible)
         {
-
+            // Vise le joueur
+            var rotation = Quaternion.LookRotation(player.transform.position - sphere.position);
+            sphere.rotation = Quaternion.RotateTowards(sphere.rotation, rotation, 10 * Time.deltaTime);
+        }
+        else if (wasVisible)
+        {
+            // replace l'orientation vers la rotation si la tourrel n'aurait pas détecté le joueur
+            if (rotation == Quaternion.identity)
+            {
+                rotation = sphere.localRotation;
+                elapsedTime = 0f;
+            }
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < timeToRotate)
+            {
+                sphere.localRotation = Quaternion.Slerp(rotation, Quaternion.Euler(futurRotation), elapsedTime / timeToRotate);
+            }
+            else
+            {
+                var temp = futurRotation;
+                futurRotation = sphere.localEulerAngles - targetRotation;
+                sphere.localEulerAngles = temp;
+                targetRotation = -targetRotation;
+                rotation = Quaternion.identity;
+                elapsedTime = 0f;
+                wasVisible = false;
+            }
         }
         else
         {
+            // Le mouvement normal de la tourrel
             elapsedTime += Time.deltaTime;
             if (elapsedTime < timeToRotate)
             {
@@ -68,6 +98,8 @@ public class TurretController : MonoBehaviour
 
     }
     // Source: https://www.youtube.com/watch?v=j1-OyLo77ss
+    // la couroutine et la fonction fieldOFViewCheck sert a changer la variable isVisible
+    // isVisible est vrai si le joueur est visible par le joueur
     IEnumerator FOV()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);
@@ -94,14 +126,24 @@ public class TurretController : MonoBehaviour
                 if (!Physics.Raycast(sphere.position, directionToTarget, distanceToTarget, obstructionMask))
                     IsVisible = true;
                 else
+                {
+                    if (IsVisible)
+                        wasVisible = true;
                     IsVisible = false;
+                }
+                
             }
             else
             {
+                if (IsVisible)
+                    wasVisible = true;
                 IsVisible = false;
             }
         }
         else if (IsVisible)
+        {
             IsVisible = false;
+            wasVisible = true;
+        }
     }
 }
