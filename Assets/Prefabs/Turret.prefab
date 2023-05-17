@@ -293,6 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5724057420080132899}
   - component: {fileID: 6347566123252602918}
+  - component: {fileID: 5243402295087555473}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -338,9 +339,34 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  rotation: {x: 0, y: 90, z: 0}
-  TimeToRotate: 5
+  targetRotation: {x: 0, y: 0, z: 0}
+  timeToRotate: 0
   shootInterval: 0
+--- !u!114 &5243402295087555473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724057420080132898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8482f7fc7b2d93840b5d702fefbf3c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  startingHealth: 1
+  maxHealth: 1
+  health: 0
+  invincibilityTime: 2
 --- !u!1 &5724057420321211721
 GameObject:
   m_ObjectHideFlags: 0

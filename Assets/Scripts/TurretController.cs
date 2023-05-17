@@ -14,11 +14,10 @@ public class TurretController : MonoBehaviour
 
     // Rotation turret
     [Header("Movement")]
-    [SerializeField] Vector3 rotation;
-    [SerializeField] float TimeToRotate;
-    Quaternion targetRotation;
-    Quaternion initialRotation;
-    float rotationDuration = 0f;
+    [SerializeField] Vector3 targetRotation;
+    [SerializeField] float timeToRotate;
+    float elapsedTime = 0f;
+    Vector3 futurRotation;
 
     Transform barrel;
     GameObject player;
@@ -41,8 +40,7 @@ public class TurretController : MonoBehaviour
             if (i.gameObject.name == "Sphere")
                 sphere = i;
         }
-        initialRotation = transform.rotation;
-        targetRotation = Quaternion.Euler(rotation);
+        futurRotation = targetRotation;
         StartCoroutine(FOV());
     }
     void Update()
@@ -53,20 +51,18 @@ public class TurretController : MonoBehaviour
         }
         else
         {
-            rotationDuration += Time.deltaTime;
-
-            if (rotationDuration < TimeToRotate)
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < timeToRotate)
             {
-                float t = rotationDuration / TimeToRotate;
-                sphere.rotation = Quaternion.Lerp(initialRotation, targetRotation, t);
+                sphere.Rotate(targetRotation * (Time.deltaTime / timeToRotate));
             }
             else
             {
-                sphere.rotation = targetRotation;
-                rotationDuration = 0f;
-                var temp = initialRotation;
-                initialRotation = targetRotation;
-                targetRotation = temp;
+                var temp = futurRotation;
+                futurRotation = sphere.localEulerAngles - targetRotation;
+                sphere.localEulerAngles = temp;
+                targetRotation = -targetRotation;
+                elapsedTime = 0f;
             }
         }
 
