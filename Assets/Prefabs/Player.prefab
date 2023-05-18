@@ -400,7 +400,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Escape from the station!
+  m_text: Enfuie toi de la station!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You died!
+  m_text: Tu est mort!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
@@ -5935,7 +5935,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You escaped!
+  m_text: 'Bravo!
+
+    Tu t''est enfui!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
@@ -7001,8 +7003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 100, y: -130}
-  m_SizeDelta: {x: 160, y: 50}
+  m_AnchoredPosition: {x: 125, y: -130}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &132109073764317597
 CanvasRenderer:
@@ -7240,7 +7242,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Recommencer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
@@ -7892,7 +7894,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quit
+  m_text: 'Quitter
 
 '
   m_isRightToLeft: 0
@@ -8029,7 +8031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back
+  m_text: Retour
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
@@ -8172,8 +8174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -100, y: -130}
-  m_SizeDelta: {x: 160, y: 50}
+  m_AnchoredPosition: {x: -125, y: -130}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4434854580131270743
 CanvasRenderer:
