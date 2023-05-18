@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +29,7 @@ public class TurretController : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] int bulletDamage;
     [SerializeField] float shootForce;
+    [SerializeField] float inaccuracy;
     float shootTimer = 0f;
     ObjectPool bulletPool;
     ParticleSystem muzzleFlash;
@@ -135,9 +136,10 @@ public class TurretController : MonoBehaviour
         bullet.transform.position = barrel.position;
         //Je lui met le dommage desirer
         bullet.GetComponent<BulletComponent>().damage = bulletDamage;
+        Quaternion innacuracyRotation = Quaternion.Euler(Random.Range(-0.5f * inaccuracy, 0.5f * inaccuracy), Random.Range(-0.5f * inaccuracy, 0.5f * inaccuracy), Random.Range(-0.5f * inaccuracy, 0.5f * inaccuracy));
+        Vector3 forceDirection = innacuracyRotation * barrel.forward;
         bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        bullet.GetComponent<Rigidbody>().AddForce(barrel.forward * shootForce, ForceMode.Impulse);
-
+        bullet.GetComponent<Rigidbody>().AddForce(forceDirection * shootForce, ForceMode.Impulse);
     }
     // Source: https://www.youtube.com/watch?v=j1-OyLo77ss
     // la couroutine et la fonction fieldOFViewCheck sert a changer la variable isVisible

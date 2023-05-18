@@ -5246,6 +5246,8 @@ GameObject:
   - component: {fileID: 5724057420080132899}
   - component: {fileID: 6347566123252602918}
   - component: {fileID: 5243402295087555473}
+  - component: {fileID: 1834382214096218133}
+  - component: {fileID: 7989049888458897258}
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -5297,6 +5299,7 @@ MonoBehaviour:
   rotationSpeed: 10
   bulletDamage: 1
   shootForce: 0.1
+  inaccuracy: 2
 --- !u!114 &5243402295087555473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5311,17 +5314,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5724057420080132898}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDamage:
     m_PersistentCalls:
       m_Calls: []
   onHeal:
     m_PersistentCalls:
       m_Calls: []
-  startingHealth: 3
-  maxHealth: 3
-  health: 0
-  invincibilityTime: 1
+  startingHealth: 50
+  maxHealth: 50
+  health: 50
+  invincibilityTime: 0
+--- !u!136 &1834382214096218133
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724057420080132898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!135 &7989049888458897258
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724057420080132898}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &5724057420321211721
 GameObject:
   m_ObjectHideFlags: 0
