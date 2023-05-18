@@ -5297,7 +5297,7 @@ MonoBehaviour:
   timeToRotate: 4
   shootInterval: 0.2
   rotationSpeed: 10
-  bulletDamage: 1
+  bulletDamage: 5
   shootForce: 0.1
   inaccuracy: 2
 --- !u!114 &5243402295087555473

@@ -179,7 +179,7 @@ MonoBehaviour:
   endPoint: {fileID: 1098968338}
   maxRaycastDistance: 200
   shootForce: 0.1
-  bulletDamage: 1
+  bulletDamage: 5
   inaccuracy: 2
   shootInterval: 0.1
 --- !u!1 &616281124
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAlpha: 0.3
   fadeSpeed: 0.1
-  alphaPerDamage: 0.02
+  alphaPerDamage: 0.03
 --- !u!1 &867538981
 GameObject:
   m_ObjectHideFlags: 0
