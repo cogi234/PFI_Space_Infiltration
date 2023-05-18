@@ -52,7 +52,7 @@ public class TurretController : MonoBehaviour
         {
             // Vise le joueur
             var rotation = Quaternion.LookRotation(player.transform.position - sphere.position);
-            sphere.rotation = Quaternion.RotateTowards(sphere.rotation, rotation, 10 * Time.deltaTime);
+            sphere.rotation = Quaternion.RotateTowards(sphere.rotation, rotation, rotationSpeed * Time.deltaTime);
         }
         else if (wasVisible)
         {
@@ -99,7 +99,7 @@ public class TurretController : MonoBehaviour
     }
     // Source: https://www.youtube.com/watch?v=j1-OyLo77ss
     // la couroutine et la fonction fieldOFViewCheck sert a changer la variable isVisible
-    // isVisible est vrai si le joueur est visible par le joueur
+    // isVisible est vrai si le joueur est visible
     IEnumerator FOV()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);
