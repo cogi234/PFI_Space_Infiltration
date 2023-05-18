@@ -1,3 +1,4 @@
 Modeles pour la station: https://sketchfab.com/3d-models/space-colony-modular-kit-bash-1ac694729ad04977ba93dafa66914aff
 Tutoriel pour les Inverse Kinematics: https://www.alanzucconi.com/2018/05/02/ik-2d-2/ et https://www.alanzucconi.com/2020/09/14/inverse-kinematics-in-3d/
 Materiaux metalliques: https://assetstore.unity.com/packages/2d/textures-materials/metals/yughues-free-metal-materials-12949
+Musique par Waterflame https://www.youtube.com/@WaterflameMusic
