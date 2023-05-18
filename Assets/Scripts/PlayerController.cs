@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject deathMessage;
+    [SerializeField] GameObject victoryMessage;
+    [SerializeField] GameObject startMessage;
     [Header("Movement")]
     [SerializeField] float walkingSpeed;
     [SerializeField] float walkingHeight;
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = GetComponentInChildren<CameraController>();
+
+        StartCoroutine(StartMessageCoroutine());
     }
 
     private void Update()
@@ -169,5 +173,25 @@ public class PlayerController : MonoBehaviour
         deathMessage.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
         SceneManager.LoadScene("Level1");
+    }
+
+    public void Victory()
+    {
+        Time.timeScale = 0;
+        StartCoroutine(VictoryCoroutine());
+    }
+
+    IEnumerator VictoryCoroutine()
+    {
+        victoryMessage.SetActive(true);
+        yield return new WaitForSecondsRealtime(5);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    IEnumerator StartMessageCoroutine()
+    {
+        startMessage.SetActive(true);
+        yield return new WaitForSecondsRealtime(5);
+        startMessage.SetActive(false);
     }
 }
