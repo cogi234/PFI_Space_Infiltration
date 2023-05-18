@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject deathMessage;
     [Header("Movement")]
     [SerializeField] float walkingSpeed;
     [SerializeField] float walkingHeight;
@@ -156,4 +158,16 @@ public class PlayerController : MonoBehaviour
         jumpTimer = jumpNoStickTime;
     }
 
+    public void OnDeath()
+    {
+        Time.timeScale = 0;
+        StartCoroutine(DeathCoroutine());
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        deathMessage.SetActive(true);
+        yield return new WaitForSecondsRealtime(5);
+        SceneManager.LoadScene("Level1");
+    }
 }
