@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &163637309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7076,7 +7076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8890323061973292288}
-  deathMessage: {fileID: 0}
+  deathMessage: {fileID: 163637308}
   walkingSpeed: 2.5
   walkingHeight: 0.25
   floorRotationSpeed: 135
