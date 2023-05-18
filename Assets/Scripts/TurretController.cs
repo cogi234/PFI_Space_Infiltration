@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
@@ -41,12 +40,6 @@ public class TurretController : MonoBehaviour
     Transform sphere;
     private void Awake()
     {
-        bulletPool = GameObject.Find("BulletPool").GetComponent<ObjectPool>();
-        muzzleFlash = barrel.GetComponent<ParticleSystem>();
-        sfx = barrel.GetComponent<AudioSource>();
-    }
-    void Start()
-    {
         player = GameObject.FindGameObjectWithTag("Player");
         obstructionMask = LayerMask.GetMask("Default");
         var transforms = GetComponentsInChildren<Transform>();
@@ -57,7 +50,13 @@ public class TurretController : MonoBehaviour
             if (i.gameObject.name == "Sphere")
                 sphere = i;
         }
+        bulletPool = GameObject.Find("BulletPool").GetComponent<ObjectPool>();
+        muzzleFlash = barrel.GetComponent<ParticleSystem>();
+        sfx = barrel.GetComponent<AudioSource>();
         futurRotation = targetRotation;
+    }
+    void Start()
+    {
         StartCoroutine(FOV());
     }
     void Update()
