@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] GameObject pauseMenu;
     [Header("Movement")]
     [SerializeField] float walkingSpeed;
     [SerializeField] float walkingHeight;
@@ -43,10 +44,10 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-        } else
-        {
-
         }
+
+        if (!pauseMenu.activeInHierarchy && Input.GetButtonDown("Cancel"))
+            pauseMenu.SetActive(true);
     }
 
     private void FixedUpdate()
