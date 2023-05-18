@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class TurretController : MonoBehaviour
@@ -21,16 +22,29 @@ public class TurretController : MonoBehaviour
     float elapsedTime = 0f;
     Vector3 futurRotation;
 
-    Transform barrel;
-    GameObject player;
-    Transform sphere;
+    
 
     // turret Attacks
     [Header("Shooting")]
     [SerializeField] float shootInterval;
     [SerializeField] float rotationSpeed;
+    [SerializeField] int bulletDamage;
+    [SerializeField] float shootForce;
     float shootTimer = 0f;
+    ObjectPool bulletPool;
+    ParticleSystem muzzleFlash;
+    AudioSource sfx;
 
+
+    Transform barrel;
+    GameObject player;
+    Transform sphere;
+    private void Awake()
+    {
+        bulletPool = GameObject.Find("BulletPool").GetComponent<ObjectPool>();
+        muzzleFlash = barrel.GetComponent<ParticleSystem>();
+        sfx = barrel.GetComponent<AudioSource>();
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -53,6 +67,17 @@ public class TurretController : MonoBehaviour
             // Vise le joueur
             var rotation = Quaternion.LookRotation(player.transform.position - sphere.position);
             sphere.rotation = Quaternion.RotateTowards(sphere.rotation, rotation, rotationSpeed * Time.deltaTime);
+
+            if (shootTimer > 0)
+            {
+                shootTimer -= Time.deltaTime;
+            }
+            else
+            {
+
+                shootTimer = shootInterval;
+                Shoot();
+            }
         }
         else if (wasVisible)
         {
@@ -75,6 +100,7 @@ public class TurretController : MonoBehaviour
                 targetRotation = -targetRotation;
                 rotation = Quaternion.identity;
                 elapsedTime = 0f;
+                shootTimer = shootInterval;
                 wasVisible = false;
             }
         }
@@ -95,6 +121,23 @@ public class TurretController : MonoBehaviour
                 elapsedTime = 0f;
             }
         }
+
+    }
+    public void Shoot()
+    {
+        sfx.Play();
+        muzzleFlash.Play();
+        //Je prends une balle
+        GameObject bullet = bulletPool.GetElement();
+        //Je lui met la layer Player
+        bullet.layer = 6;
+        bullet.SetActive(true);
+        //Je la met au bon endroit
+        bullet.transform.position = barrel.position;
+        //Je lui met le dommage desirer
+        bullet.GetComponent<BulletComponent>().damage = bulletDamage;
+        bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        bullet.GetComponent<Rigidbody>().AddForce(barrel.up * shootForce, ForceMode.Impulse);
 
     }
     // Source: https://www.youtube.com/watch?v=j1-OyLo77ss
