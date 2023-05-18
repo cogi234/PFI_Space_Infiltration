@@ -129,14 +129,14 @@ public class TurretController : MonoBehaviour
         //Je prends une balle
         GameObject bullet = bulletPool.GetElement();
         //Je lui met la layer Player
-        bullet.layer = 6;
+        bullet.layer = 7;
         bullet.SetActive(true);
         //Je la met au bon endroit
         bullet.transform.position = barrel.position;
         //Je lui met le dommage desirer
         bullet.GetComponent<BulletComponent>().damage = bulletDamage;
         bullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        bullet.GetComponent<Rigidbody>().AddForce(barrel.up * shootForce, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(barrel.forward * shootForce, ForceMode.Impulse);
 
     }
     // Source: https://www.youtube.com/watch?v=j1-OyLo77ss

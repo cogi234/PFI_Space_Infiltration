@@ -19,7 +19,7 @@ public class BulletComponent : MonoBehaviour
         if (collision.gameObject.TryGetComponent<HealthComponent>(out health))
             health.TakeDamage(damage);
         //On fait apparaitre une etincelle
-        GameObject.Instantiate(sparkPrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal, transform.up));
+        Instantiate(sparkPrefab, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal, transform.up));
         //On desactive la balle
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;

@@ -76,6 +76,5 @@ public class GunController : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(forceDirection * shootForce, ForceMode.Impulse);
         //Je met une force inverse sur le joueur
         associatedRigidbody.AddForce(-forceDirection * shootForce, ForceMode.Impulse);
-
     }
 }

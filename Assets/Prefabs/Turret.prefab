@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5724057418383188655}
   - component: {fileID: 5724057418383188654}
   - component: {fileID: 5724057418383188653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5724057418383188627}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1160966575344786810}
   - component: {fileID: 3853570396688122872}
   - component: {fileID: 8248469080390966638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Barrel
   m_Icon: {fileID: 0}
@@ -5080,7 +5080,7 @@ GameObject:
   - component: {fileID: 5724057418951792440}
   - component: {fileID: 5724057418951792443}
   - component: {fileID: 5724057418951792442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5163,7 +5163,7 @@ GameObject:
   - component: {fileID: 5724057419362105892}
   - component: {fileID: 5724057419362105899}
   - component: {fileID: 5724057419362105898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5246,7 +5246,7 @@ GameObject:
   - component: {fileID: 5724057420080132899}
   - component: {fileID: 6347566123252602918}
   - component: {fileID: 5243402295087555473}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5268,7 +5268,7 @@ Transform:
   - {fileID: 5724057419362105892}
   - {fileID: 5724057418383188655}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6347566123252602918
 MonoBehaviour:
@@ -5282,8 +5282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad073d617981e749aaad394ad0fb7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  angle: 60
+  radius: 20
+  angle: 70
   IsVisible: 0
   obstructionMask:
     serializedVersion: 2
@@ -5291,10 +5291,12 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 64
-  targetRotation: {x: 0, y: 0, z: 0}
-  timeToRotate: 0
-  shootInterval: 0
-  rotationSpeed: 0
+  targetRotation: {x: 0, y: 90, z: 0}
+  timeToRotate: 4
+  shootInterval: 0.2
+  rotationSpeed: 10
+  bulletDamage: 1
+  shootForce: 0.1
 --- !u!114 &5243402295087555473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5316,10 +5318,10 @@ MonoBehaviour:
   onHeal:
     m_PersistentCalls:
       m_Calls: []
-  startingHealth: 1
-  maxHealth: 1
+  startingHealth: 3
+  maxHealth: 3
   health: 0
-  invincibilityTime: 2
+  invincibilityTime: 1
 --- !u!1 &5724057420321211721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5331,7 +5333,7 @@ GameObject:
   - component: {fileID: 5724057420321211722}
   - component: {fileID: 5724057420321211717}
   - component: {fileID: 5724057420321211716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
