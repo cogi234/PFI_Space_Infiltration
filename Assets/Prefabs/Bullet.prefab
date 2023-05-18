@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  sparkPrefab: {fileID: 3606887183820902937, guid: eb47c77a55c16614d97bf318444e888a, type: 3}
 --- !u!114 &7896086543943139113
 MonoBehaviour:
   m_ObjectHideFlags: 0
