@@ -5250,7 +5250,7 @@ GameObject:
   - component: {fileID: 7989049888458897258}
   m_Layer: 7
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: turrets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5270,7 +5270,7 @@ Transform:
   - {fileID: 5724057419362105892}
   - {fileID: 5724057418383188655}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6347566123252602918
 MonoBehaviour:
