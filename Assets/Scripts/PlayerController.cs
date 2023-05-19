@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < raycastPositions.Length; i++)
                 {
                     RaycastHit sideHit;
-                    if (Physics.Raycast((Vector3)(transform.localToWorldMatrix * raycastPositions[i]) + transform.position, transform.localToWorldMatrix * raycastDirections[i], out sideHit, raycastDistance * 5, ~LayerMask.GetMask("Player")))
+                    if (Physics.Raycast((Vector3)(transform.localToWorldMatrix * raycastPositions[i]) + transform.position, transform.localToWorldMatrix * raycastDirections[i], out sideHit, raycastDistance * 5, ~LayerMask.GetMask("Player", "Ignore Raycast")))
                     {
                         if (sideHit.distance < raycastDistance)
                         {
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             {
                 //On utilise un SphereCast pour voir si on est de retour sur une surface
                 RaycastHit hit;
-                if (Physics.SphereCast(transform.position, 0.25f, -transform.up, out hit, walkingHeight, ~LayerMask.GetMask("Player")))
+                if (Physics.SphereCast(transform.position, 0.25f, -transform.up, out hit, walkingHeight, ~LayerMask.GetMask("Player", "Ignore Raycast")))
                 {
                     //On se remet en mode marcher
                     rb.isKinematic = true;
@@ -185,6 +185,9 @@ public class PlayerController : MonoBehaviour
     {
         victoryMessage.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene("MainMenu");
     }
 
