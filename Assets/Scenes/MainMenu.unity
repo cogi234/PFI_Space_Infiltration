@@ -218,7 +218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music by Waterflame
+  m_text: Musique par Waterflame
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}
   m_sharedMaterial: {fileID: 6127358598588953145, guid: 1d919e7d22c122545b1af04f93b567a0, type: 2}

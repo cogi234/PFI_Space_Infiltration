@@ -5296,7 +5296,7 @@ MonoBehaviour:
   targetRotation: {x: 0, y: 90, z: 0}
   timeToRotate: 4
   shootInterval: 0.2
-  rotationSpeed: 10
+  rotationSpeed: 30
   bulletDamage: 5
   shootForce: 0.1
   inaccuracy: 2

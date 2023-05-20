@@ -256,6 +256,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1943488868}
     m_Modifications:
+    - target: {fileID: 2756540417608779610, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756540417608779610, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2967023772514507812, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -280,6 +288,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1251060508}
+    - target: {fileID: 5337944562623294489, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337944562623294489, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6731978104945067805, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
       propertyPath: m_Name
       value: Turret10
@@ -291,6 +307,14 @@ PrefabInstance:
     - target: {fileID: 7397964659820427262, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
       propertyPath: m_Name
       value: Turret8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201656964328692986, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201656964328692986, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
+      propertyPath: radius
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8459445666232577842, guid: d77b0ac84b0af8c4c92342ee37e40982, type: 3}
       propertyPath: m_RootOrder
@@ -374,6 +398,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret4
       objectReference: {fileID: 0}
+    - target: {fileID: 1568220463946506314, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238659768937881195, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2307436452481457962, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
       propertyPath: m_Name
       value: Turret1
@@ -381,6 +413,14 @@ PrefabInstance:
     - target: {fileID: 2417927523384375606, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
       propertyPath: m_Name
       value: Turret2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960579846427497010, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3998443428645385262, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
+      propertyPath: radius
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4483900010972267935, guid: 8f931fadbd263eb4889ab36678ae6a88, type: 3}
       propertyPath: m_RootOrder
@@ -795,6 +835,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3457738968211646706, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457738968211646706, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457738968211646706, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457738968211646706, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: shootInterval
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3537223980914097107, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -834,6 +890,38 @@ PrefabInstance:
     - target: {fileID: 5613951949795753676, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729757883850806447, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729757883850806447, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729757883850806447, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729757883850806447, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: shootInterval
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990290221657700111, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990290221657700111, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: radius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990290221657700111, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: rotationSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990290221657700111, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
+      propertyPath: shootInterval
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8762822591619128331, guid: c1d1b05bf02700746aa2777c6cb9bfb4, type: 3}
       propertyPath: m_Name
@@ -905,6 +993,10 @@ PrefabInstance:
     - target: {fileID: 5724057420080132898, guid: c0767ab2dbbe8c14daea46f68445d997, type: 3}
       propertyPath: m_Name
       value: Turret3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724057420080132898, guid: c0767ab2dbbe8c14daea46f68445d997, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5724057420080132899, guid: c0767ab2dbbe8c14daea46f68445d997, type: 3}
       propertyPath: m_RootOrder

@@ -65,7 +65,7 @@ public class TurretController : MonoBehaviour
         if (IsVisible)
         {
             // Vise le joueur
-            var rotation = Quaternion.LookRotation(player.transform.position - sphere.position);
+            var rotation = Quaternion.LookRotation(player.transform.position - sphere.position, transform.up);
             sphere.rotation = Quaternion.RotateTowards(sphere.rotation, rotation, rotationSpeed * Time.deltaTime);
 
             if (shootTimer > 0)
@@ -158,7 +158,7 @@ public class TurretController : MonoBehaviour
     {
         Collider[] rangeChecks = Physics.OverlapSphere(sphere.position, radius, targetMask);
 
-        if (rangeChecks.Length != 0)
+        if (rangeChecks.Length != 0 && rangeChecks[0].gameObject.tag == "Player")
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - sphere.position).normalized;

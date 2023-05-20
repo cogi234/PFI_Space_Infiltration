@@ -186,8 +186,8 @@ public class PlayerController : MonoBehaviour
         victoryMessage.SetActive(true);
         yield return new WaitForSecondsRealtime(5);
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("MainMenu");
     }
 
